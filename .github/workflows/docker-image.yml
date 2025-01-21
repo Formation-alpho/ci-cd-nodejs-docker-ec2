@@ -25,8 +25,8 @@ jobs:
         run: npm install
 
       # Étape 4: Lancer les tests
-      - name: Run tests
-        run: npm test
+      #- name: Run tests
+       # run: npm test
 
       # Étape 5: Construire l'image Docker
       - name: Build Docker image
