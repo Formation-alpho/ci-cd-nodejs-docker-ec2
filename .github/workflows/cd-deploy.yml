@@ -16,16 +16,16 @@ jobs:
       # Step 2: Pull Docker image from Docker Hub
       - name: Pull Docker image
         run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker pull otniel217/cicd-pipeline:latest
+          sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          sudo docker pull otniel217/cicd-pipeline:latest
 
       # Step 3: Stop and remove the existing container (if any)
       - name: Stop and remove existing container
         run: |
-          docker stop app || true
-          docker rm app || true
+          sudo docker stop app || true
+          sudo docker rm app || true
 
       # Step 4: Deploy the new container
       - name: Run new container
         run: |
-          docker run -d --name app -p 3001:3001 otniel217/cicd-pipeline:latest
+          sudo docker run -d --name app -p 3001:3001 otniel217/cicd-pipeline:latest
