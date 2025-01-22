@@ -32,5 +32,5 @@ jobs:
           context: .
           push: true
           tags: |
-            otniel217/cicd-pipeline:latest
+            otniel217/cicd-pipeline
             otniel217/cicd-pipeline:${{ github.sha }}
