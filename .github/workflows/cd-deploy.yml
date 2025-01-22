@@ -5,7 +5,6 @@ on:
 
 jobs:
   deploy:
-    # Use the self-hosted runner
     runs-on: self-hosted
 
     steps:
@@ -18,6 +17,7 @@ jobs:
         run: |
           sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           sudo docker pull otniel217/cicd-pipeline:latest
+          sudo docker images # Verify the image is pulled
 
       # Step 3: Stop and remove the existing container (if any)
       - name: Stop and remove existing container
@@ -29,3 +29,8 @@ jobs:
       - name: Run new container
         run: |
           sudo docker run -d --name app -p 3001:3001 otniel217/cicd-pipeline:latest
+          
+      # Optional Step: Check if the container is running
+      - name: Verify the container is running
+        run: |
+          sudo docker ps -a # List all containers to verify if it's running
