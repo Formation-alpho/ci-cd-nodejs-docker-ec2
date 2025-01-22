@@ -1,0 +1,31 @@
+name: CD Deploy with Self-Hosted Runner
+
+on:
+  workflow_dispatch: # Triggered manually from the GitHub Actions UI
+
+jobs:
+  deploy:
+    # Use the self-hosted runner
+    runs-on: self-hosted
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Pull Docker image from Docker Hub
+      - name: Pull Docker image
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker pull otniel217/cicd-pipeline:latest
+
+      # Step 3: Stop and remove the existing container (if any)
+      - name: Stop and remove existing container
+        run: |
+          docker stop app || true
+          docker rm app || true
+
+      # Step 4: Deploy the new container
+      - name: Run new container
+        run: |
+          docker run -d --name app -p 3001:3001 otniel217/cicd-pipeline:latest
