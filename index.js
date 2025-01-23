@@ -60,7 +60,7 @@ const server = http.createServer((req, res) => {
 });
 
 // Démarrage du serveur sur le port 3000
-const PORT = 3001;
+const PORT = 8080;
 server.listen(PORT, () => {
     console.log(`Serveur démarré sur http://localhost:${PORT}`);
 });

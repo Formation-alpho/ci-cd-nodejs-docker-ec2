@@ -24,7 +24,7 @@ WORKDIR /app
 COPY --from=builder /app /app
 
 # Étape 9 : Exposer le port de l'application (exemple : 3000)
-EXPOSE 3001
+EXPOSE 8080
 
 # Étape 10 : Définir la commande de démarrage
 CMD ["npm", "start"]
